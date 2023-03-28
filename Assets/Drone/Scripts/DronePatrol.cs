@@ -13,6 +13,8 @@ public class DronePatrol : MonoBehaviour
     GameObject[] All_Waypoints;
     bool Is_Travelling;
 
+    public float MaxDistance = 15f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,10 +33,7 @@ public class DronePatrol : MonoBehaviour
             SetDestination();
         }
 
-        if (Is_Travelling)
-        {
-            LookForPlayer();
-        }
+        LookForPlayer();
     }
 
     private void SetDestination()
@@ -68,7 +67,7 @@ public class DronePatrol : MonoBehaviour
 
         Vector3 Player_Distance = Player_Pos - Drone_Pos;
 
-        if (Vector3.Distance(Player_Pos, Drone_Pos) < 5)
+        if (Vector3.Distance(Player_Pos, Drone_Pos) < MaxDistance)
         {
             Nav_Mesh_Agent.SetDestination(Player_Pos);
             Is_Travelling = true;
